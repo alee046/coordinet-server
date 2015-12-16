@@ -14,6 +14,20 @@ io.sockets.on('connection', function (socket) {
   socket.on('add-message', function (data) {
     io.emit('add-message', data);
   });
+// when the client emits 'stop typing', we broadcast it to others
+  socket.on('typing', function () {
+  socket.broadcast.emit('typing', {
+    username: socket.uName
+  });
+});
+
+  // when the client emits 'stop typing', we broadcast it to others
+  socket.on('stop typing', function () {
+    socket.broadcast.emit('stop typing', {
+      username: socket.uName
+    });
+  });
+
 
 });
 
